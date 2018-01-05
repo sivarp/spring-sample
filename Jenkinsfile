@@ -1,7 +1,10 @@
 node {
+	
+	checkout scm
+
 	stage('Build') {
 		docker.image('maven:3-alpine').inside {
-			sh 'mvn --version'
+			sh 'mvn -B build'
 		}
 	}
 
