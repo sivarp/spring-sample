@@ -1,7 +1,5 @@
 node {
-
-	stage 'Build'
-	{
+	stage 'Build' {
 		docker.image('maven:3-alpine').inside {
 			sh 'mvn --version'
 		}
