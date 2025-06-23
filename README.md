@@ -1,23 +1,34 @@
 # spring-sample
 
-This project demonstrates a simple Spring Boot application packaged as a WAR file. It now targets Spring Boot 3 and Java 21 and includes a small example of a digital book library backed by MongoDB.
+This project provides a small Spring Boot library for managing books stored in MongoDB. It targets Spring Boot 3 and Java 21.
 
-## Running
+## Usage
 
-Configure a MongoDB instance (default `mongodb://localhost:27017/bookdb`) or adjust `application.properties`. Build and run the application using Maven:
+Add this project as a dependency to gain the `Book` model, repository and REST controller. Configure a MongoDB instance (default `mongodb://localhost:27017/bookdb`) via `application.properties`.
+
+## Building
+
+Use Maven to build the library:
 
 ```bash
-mvn spring-boot:run
+mvn package
 ```
 
-The REST endpoints for managing books are exposed under `/books`.
+Maven may need proxy settings to resolve dependencies. This repository provides
+`.mvn/settings.xml` configured for a proxy at `proxy:8080`; use it with
+`mvn -s .mvn/settings.xml` if required. The same settings are used by the
+`Dockerfile` and `Jenkinsfile` so that builds succeed without additional
+configuration.
+
+Tests run with an embedded Spring context and do not require MongoDB.
 
 ## Docker
 
-You can also run the application with a local MongoDB using Docker Compose:
+To try the library as a standalone application with MongoDB, use Docker Compose:
 
 ```bash
 docker compose up --build
 ```
 
-This exposes the application on port `8080` and MongoDB on `27017`.
+The container image is built using the provided `Dockerfile` and listens on
+port `8080`.
