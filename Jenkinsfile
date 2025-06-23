@@ -1,13 +1,10 @@
-node {
-	
-	checkout scm
-
-	stage('Build') {
-		docker.image('maven:3-alpine').inside {
-			sh 'mvn -B build'
-		}
-	}
-
-	stage 'Test'
-	stage 'Deploy'
+pipeline {
+    agent any
+    stages {
+        stage('Build & Test') {
+            steps {
+                sh 'mvn -s .mvn/settings.xml test'
+            }
+        }
+    }
 }
